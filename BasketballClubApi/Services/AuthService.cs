@@ -72,6 +72,10 @@ namespace BasketballClub_Rest.Services
                 return new AuthData { Errors = new[] { "Username already taken!" } };
             }
             List<Code> codes = uow.Users.GetCodes();
+            if(!Int32.TryParse(model.Code, out int result))
+            {
+                return new AuthData { Errors = new[] { "Code must be a number!" } };
+            }
             if (!codes.Any(c => c.Value == Int32.Parse(model.Code)))
             {
                 return new AuthData { Errors = new[] { "Wrong registration code." } };

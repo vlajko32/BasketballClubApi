@@ -24,7 +24,7 @@ namespace BasketballClub_Rest.Controllers
             this.uow = uow;
         }
 
-        [Authorize(Roles="Administrator")]
+        //[Authorize(Roles="Administrator")]
         [HttpPost("create")]
         public IActionResult CreatePlayer([FromBody] PlayerModel model)
         {
@@ -56,7 +56,7 @@ namespace BasketballClub_Rest.Controllers
 
 
 
-        [Authorize(Roles = "Operator, Coach")]
+       // [Authorize(Roles = "Operator, Coach")]
         // PUT api/<PlayerController>/5
         [HttpPut("{id}")]
         public IActionResult UpdatePlayer([FromRoute] int id, [FromBody] PlayerModel model)
@@ -71,7 +71,7 @@ namespace BasketballClub_Rest.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Operator")]
+        //[Authorize(Roles = "Operator")]
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
@@ -86,7 +86,7 @@ namespace BasketballClub_Rest.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Operator, Coach")]
+        //[Authorize(Roles = "Operator, Coach")]
         [HttpGet]
        public IActionResult GetAll()
         {
@@ -103,7 +103,7 @@ namespace BasketballClub_Rest.Controllers
             return Ok(players);
         }
 
-        [Authorize(Roles = "Operator, Coach")]
+       // [Authorize(Roles = "Operator, Coach")]
         [HttpGet("withoutSelection")]
         public IActionResult GetWithoutSelection()
         {

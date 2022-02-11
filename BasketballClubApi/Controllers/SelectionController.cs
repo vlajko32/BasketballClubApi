@@ -102,7 +102,7 @@ namespace BasketballClub_Rest.Controllers
 
         }
 
-        [Authorize(Roles = "Operator")]
+     //   [Authorize(Roles = "Operator")]
         [HttpPost("create")]
         public IActionResult CreateSelection([FromBody] SelectionModel model)
         {
@@ -124,7 +124,7 @@ namespace BasketballClub_Rest.Controllers
             return Ok(selection);
         }
 
-        [Authorize(Roles = "Operator")]
+      //  [Authorize(Roles = "Operator")]
         [HttpDelete("{id}")]
         public IActionResult DeleteSelection(int id)
         {
