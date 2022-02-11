@@ -1,4 +1,5 @@
 using BasketballClub_Rest.Domain;
+using BasketballClub_Rest.Repository.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +37,8 @@ namespace BasketballClubApi
             });
 
             services.AddDbContext<BCContext>();
+            services.AddScoped<IUnitOfWork, BCUnitOfWork>();
+
 
         }
 
