@@ -4,14 +4,16 @@ using BasketballClub_Rest.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BasketballClubApi.Migrations
 {
     [DbContext(typeof(BCContext))]
-    partial class BCContextModelSnapshot : ModelSnapshot
+    [Migration("20220211123308_ChangedSeeded")]
+    partial class ChangedSeeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
