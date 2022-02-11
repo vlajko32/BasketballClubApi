@@ -43,7 +43,6 @@ namespace BasketballClub_Rest.Domain
             base.OnModelCreating(builder);
 
             builder.Entity<SelectionAge>().HasData(
-                new SelectionAge { SelectionAgeID = 1, SelectionAgeName = "Under 10"},
                 new SelectionAge { SelectionAgeID = 2, SelectionAgeName = "Under 12" },
                 new SelectionAge { SelectionAgeID = 3, SelectionAgeName = "Under 14" },
                 new SelectionAge { SelectionAgeID = 4, SelectionAgeName = "Under 16" },
@@ -55,7 +54,9 @@ namespace BasketballClub_Rest.Domain
 
             builder.Entity<Code>().HasData(
                 new Code { Id = 1, Value = 240798 },
-                new Code { Id = 2, Value = 897042 }
+                new Code { Id = 2, Value = 897042 },
+                new Code { Id = 3, Value = 182429 },
+                new Code { Id = 4, Value = 292418 }
                 );
          
 
