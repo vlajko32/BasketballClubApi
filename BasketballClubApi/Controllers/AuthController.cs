@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Controllers
 {
+    /// <summary>
+    /// Kontroler koji sluzi za registraciju i prijavljivanje korisnika
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -24,6 +27,11 @@ namespace BasketballClub_Rest.Controllers
             this.uow = uow;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za registraciju korisnika
+        /// </summary>
+        /// <param name="model">Model sa svim neophodnim podacima o korisniku</param>
+        /// <returns>IActionResult koji pokazuje gresku ukoliko postoji, ili status OK ukoliko je zahtev validan</returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterModel model)
@@ -47,7 +55,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok(authData);
 
         }
-
+        /// <summary>
+        /// Metoda koja sluzi za prijavljivanje korisnika
+        /// </summary>
+        /// <param name="model">Model sa podacima potrebnim za prijavljivanje korisnika</param>
+        /// <returns>IActionResult koji pokazuje gresku ukoliko postoji, ili status OK ukoliko je zahtev validan</returns>
         [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel model)

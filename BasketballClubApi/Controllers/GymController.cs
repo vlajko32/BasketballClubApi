@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Controllers
 {
+    /// <summary>
+    /// Kontroler za rad sa salama
+    /// </summary>
     [AllowAnonymous]
     [Route("api/gym")]
     [ApiController]
@@ -21,7 +24,10 @@ namespace BasketballClub_Rest.Controllers
         {
             this.uow = uow;
         }
-
+        /// <summary>
+        /// Metoda koja vraca sve sale iz baze
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu baza</returns>
         [HttpGet]
         public IActionResult GetAll()
         {

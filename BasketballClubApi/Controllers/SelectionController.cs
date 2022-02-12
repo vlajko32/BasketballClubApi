@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Controllers
 {
+    /// <summary>
+    /// Kontroler za rad sa selekcijama
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class SelectionController : ControllerBase
@@ -21,6 +24,10 @@ namespace BasketballClub_Rest.Controllers
         {
             this.uow = uow;
         }
+        /// <summary>
+        /// Metoda koja sluzi za vracanje svih selekcija iz baze
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu selekcija</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
@@ -28,7 +35,11 @@ namespace BasketballClub_Rest.Controllers
             List<Selection> selections = uow.Selections.GetAll();
             return Ok(selections);
         }
-       
+
+        /// <summary>
+        /// Metoda koja sluzi za vracanje svih uzrasta iz baze
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu uzrasta</returns>
         [HttpGet("ages")]
         public IActionResult GetAllAges()
         {
@@ -36,6 +47,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok(selectionAges);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za vracanje odredjene selekcije iz baze
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult koji sadrzi trazenu selekciju</returns>
         [HttpGet("{id}")]
         public IActionResult GetByID([FromRoute] int id)
         {
@@ -43,6 +59,12 @@ namespace BasketballClub_Rest.Controllers
             return Ok(s);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za azuriranje selekcije u bazi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
         [HttpPut("{id}")]
         public IActionResult UpdateSelection([FromRoute] int id, [FromBody] SelectionModel model)
         {
@@ -102,6 +124,11 @@ namespace BasketballClub_Rest.Controllers
 
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za kreiranje nove selekcije u bazi
+        /// </summary>
+        /// <param name="model">SelectionModel koji sadrzi neophodne podatke o selekciji</param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
      //   [Authorize(Roles = "Operator")]
         [HttpPost("create")]
         public IActionResult CreateSelection([FromBody] SelectionModel model)
@@ -124,6 +151,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok(selection);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za brisanje selekcije iz baze
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
       //  [Authorize(Roles = "Operator")]
         [HttpDelete("{id}")]
         public IActionResult DeleteSelection(int id)

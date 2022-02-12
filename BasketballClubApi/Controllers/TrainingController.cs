@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Controllers
 {
+    /// <summary>
+    /// Kontroler za rad sa treninzima
+    /// </summary>
     [Route("api/training")]
     [ApiController]
     public class TrainingController : ControllerBase
@@ -23,6 +26,11 @@ namespace BasketballClub_Rest.Controllers
         {
             this.uow = uow;
         }
+
+        /// <summary>
+        /// Metoda koja vraca sve postojece treninge iz baze
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu treninga</returns>
         //[Authorize(Roles = "Operator, Coach")]
         [HttpGet]
         public IActionResult GetAll()
@@ -31,6 +39,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok(trainings);
         }
 
+        /// <summary>
+        /// Metoda koja vraca treninge za odredjenu salu
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult koji sadrzi listu treninga</returns>
         [HttpGet("{id}")]
         public IActionResult GetByGym(int id)
         {
@@ -38,7 +51,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok(trainings);
         }
 
-
+        /// <summary>
+        /// Metoda koja kreira novi trening
+        /// </summary>
+        /// <param name="model">TrainingModel koji sadrzi sve neophodne podatke za kreiranej treninga</param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
         //[Authorize(Roles = "Coach")]
 
         [HttpPost("create")]
@@ -64,6 +81,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Metoda koja brise trening iz baze
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
         //[Authorize(Roles = "Operator, Coach")]
 
         [HttpDelete("{id}")]

@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Controllers
 {
+    /// <summary>
+    /// Kontroler za rad sa igracima
+    /// </summary>
     [Route("api/player")]
     [ApiController]
     public class PlayerController : ControllerBase
@@ -23,7 +26,11 @@ namespace BasketballClub_Rest.Controllers
         {
             this.uow = uow;
         }
-
+        /// <summary>
+        /// Metoda koja sluzi za kreiranje novog igraca
+        /// </summary>
+        /// <param name="model">Model koji sadrzi sve potrebne podatke o igracu</param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
         //[Authorize(Roles="Administrator")]
         [HttpPost("create")]
         public IActionResult CreatePlayer([FromBody] PlayerModel model)
@@ -54,9 +61,14 @@ namespace BasketballClub_Rest.Controllers
         }
 
 
+        /// <summary>
+        /// Metoda koja sluzi za azuriranje igraca u bazi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
 
-
-       // [Authorize(Roles = "Operator, Coach")]
+        // [Authorize(Roles = "Operator, Coach")]
         // PUT api/<PlayerController>/5
         [HttpPut("{id}")]
         public IActionResult UpdatePlayer([FromRoute] int id, [FromBody] PlayerModel model)
@@ -71,6 +83,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za brisanje igraca iz baze
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
         //[Authorize(Roles = "Operator")]
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
@@ -86,6 +103,10 @@ namespace BasketballClub_Rest.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za vracanje svih igraca iz baze
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu igraca</returns>
         //[Authorize(Roles = "Operator, Coach")]
         [HttpGet]
        public IActionResult GetAll()
@@ -95,7 +116,11 @@ namespace BasketballClub_Rest.Controllers
         }
 
 
-
+        /// <summary>
+        /// Metoda koja sluzi za vracanje igraca sa odredjenim kriterijumom iz baze
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>IActionResult koji sadrzi listu igraca koji odgovaraju datom zahtevu</returns>
         [HttpGet("{search}")]
         public IActionResult GetAll(string search)
         {
@@ -103,6 +128,10 @@ namespace BasketballClub_Rest.Controllers
             return Ok(players);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za vracanje iz baze igraca koji ne nastupaju ni za jednu selekciju
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu igraca bez selekcije</returns>
        // [Authorize(Roles = "Operator, Coach")]
         [HttpGet("withoutSelection")]
         public IActionResult GetWithoutSelection()

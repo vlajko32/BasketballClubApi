@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Controllers
 {
+    /// <summary>
+    /// Kontroler koji sluzi za pozivanje operacija nad objektom Coach
+    /// </summary>
     [Route("api/coach")]
     [ApiController]
   //  [Authorize(Roles = "Operator, Coach")]
@@ -46,7 +49,10 @@ namespace BasketballClub_Rest.Controllers
 
         //}
        // [Authorize(Roles = "Operator, Coach")]
-
+       /// <summary>
+       /// Metoda koja sluzi za vracanje svih objekata Coach iz baze
+       /// </summary>
+       /// <returns>IActionResult koji sadrzi listu trenera</returns>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -54,7 +60,11 @@ namespace BasketballClub_Rest.Controllers
             return Ok(coaches);
         }
        // [Authorize(Roles = "Operator, Coach")]
-
+       /// <summary>
+       /// Metoda koja sluzi za vracanje iz baze trenera sa datom sifrom
+       /// </summary>
+       /// <param name="id"></param>
+       /// <returns>IActionResult sa trenerom</returns>
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
@@ -62,6 +72,10 @@ namespace BasketballClub_Rest.Controllers
             return Ok(coach);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za vracanje iz baze trenera koji ne treniraju nijednu selekciju
+        /// </summary>
+        /// <returns>IActionResult koji sadrzi listu trenera</returns>
        // [Authorize(Roles = "Operator")]
         [HttpGet("withoutSelection")]
         public IActionResult GetWithoutSelection()
@@ -69,7 +83,11 @@ namespace BasketballClub_Rest.Controllers
             List<Coach> coaches = uow.Coaches.GetWithoutSelection();
             return Ok(coaches);
         }
-
+        /// <summary>
+        /// Metoda koja sluzi za brisanje trenera iz baze
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
       //  [Authorize(Roles = "Operator")]
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
@@ -86,6 +104,12 @@ namespace BasketballClub_Rest.Controllers
 
       //  [Authorize(Roles = "Operator")]
 
+        /// <summary>
+        /// Metoda koja sluzi za azuriranje trenera u bazi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns>IActionResult</returns>
         [HttpPut("{id}")]
         public IActionResult UpdateCoach([FromRoute] int id, [FromBody] CoachModel model)
         {
