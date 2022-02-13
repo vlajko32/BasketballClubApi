@@ -48,6 +48,11 @@ namespace BasketballClub_Rest.Domain
         public DbSet<SelectionAge> SelectionAges { get; set; }
 
         /// <summary>
+        /// Operators tabela u bazi
+        /// </summary>
+        public DbSet<Administrator> Operators { get; set; }
+
+        /// <summary>
         /// Coes tabela u bazi
         /// </summary>
         public DbSet<Code> Codes { get; set; }
@@ -56,6 +61,7 @@ namespace BasketballClub_Rest.Domain
         /// Metoda koja sluzi za konfigurisanje pristupa bazi
         /// </summary>
         /// <param name="optionsBuilder"></param>
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=basketball-club-api;");

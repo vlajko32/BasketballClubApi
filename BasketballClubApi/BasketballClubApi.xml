@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BasketballClubApi</name>
+    </assembly>
+    <members>
+        <member name="T:BasketballClub_Rest.Controllers.AuthController">
+            <summary>
+            Kontroler koji sluzi za registraciju i prijavljivanje korisnika
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.AuthController.Register(BasketballClub_Rest.DTO.RegisterModel)">
+            <summary>
+            Metoda koja sluzi za registraciju korisnika
+            </summary>
+            <param name="model">Model sa svim neophodnim podacima o korisniku</param>
+            <returns>IActionResult koji pokazuje gresku ukoliko postoji, ili status OK ukoliko je zahtev validan</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.AuthController.Login(BasketballClub_Rest.DTO.LoginModel)">
+            <summary>
+            Metoda koja sluzi za prijavljivanje korisnika
+            </summary>
+            <param name="model">Model sa podacima potrebnim za prijavljivanje korisnika</param>
+            <returns>IActionResult koji pokazuje gresku ukoliko postoji, ili status OK ukoliko je zahtev validan</returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Controllers.CoachController">
+            <summary>
+            Kontroler koji sluzi za pozivanje operacija nad objektom Coach
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.CoachController.GetAll">
+            <summary>
+            Metoda koja sluzi za vracanje svih objekata Coach iz baze
+            </summary>
+            <returns>IActionResult koji sadrzi listu trenera</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.CoachController.GetById(System.Int32)">
+            <summary>
+            Metoda koja sluzi za vracanje iz baze trenera sa datom sifrom
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult sa trenerom</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.CoachController.GetWithoutSelection">
+            <summary>
+            Metoda koja sluzi za vracanje iz baze trenera koji ne treniraju nijednu selekciju
+            </summary>
+            <returns>IActionResult koji sadrzi listu trenera</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.CoachController.Delete(System.Int32)">
+            <summary>
+            Metoda koja sluzi za brisanje trenera iz baze
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.CoachController.UpdateCoach(System.Int32,BasketballClub_Rest.DTO.CoachModel)">
+            <summary>
+            Metoda koja sluzi za azuriranje trenera u bazi
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Controllers.GymController">
+            <summary>
+            Kontroler za rad sa salama
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.GymController.GetAll">
+            <summary>
+            Metoda koja vraca sve sale iz baze
+            </summary>
+            <returns>IActionResult koji sadrzi listu baza</returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Controllers.PlayerController">
+            <summary>
+            Kontroler za rad sa igracima
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.CreatePlayer(BasketballClub_Rest.DTO.PlayerModel)">
+            <summary>
+            Metoda koja sluzi za kreiranje novog igraca
+            </summary>
+            <param name="model">Model koji sadrzi sve potrebne podatke o igracu</param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.UpdatePlayer(System.Int32,BasketballClub_Rest.DTO.PlayerModel)">
+            <summary>
+            Metoda koja sluzi za azuriranje igraca u bazi
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.Delete(System.Int32)">
+            <summary>
+            Metoda koja sluzi za brisanje igraca iz baze
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.GetAll">
+            <summary>
+            Metoda koja sluzi za vracanje svih igraca iz baze
+            </summary>
+            <returns>IActionResult koji sadrzi listu igraca</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.GetAll(System.String)">
+            <summary>
+            Metoda koja sluzi za vracanje igraca sa odredjenim kriterijumom iz baze
+            </summary>
+            <param name="search"></param>
+            <returns>IActionResult koji sadrzi listu igraca koji odgovaraju datom zahtevu</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.GetWithoutSelection">
+            <summary>
+            Metoda koja sluzi za vracanje iz baze igraca koji ne nastupaju ni za jednu selekciju
+            </summary>
+            <returns>IActionResult koji sadrzi listu igraca bez selekcije</returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Controllers.SelectionController">
+            <summary>
+            Kontroler za rad sa selekcijama
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.SelectionController.GetAll">
+            <summary>
+            Metoda koja sluzi za vracanje svih selekcija iz baze
+            </summary>
+            <returns>IActionResult koji sadrzi listu selekcija</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.SelectionController.GetAllAges">
+            <summary>
+            Metoda koja sluzi za vracanje svih uzrasta iz baze
+            </summary>
+            <returns>IActionResult koji sadrzi listu uzrasta</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.SelectionController.GetByID(System.Int32)">
+            <summary>
+            Metoda koja sluzi za vracanje odredjene selekcije iz baze
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult koji sadrzi trazenu selekciju</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.SelectionController.UpdateSelection(System.Int32,BasketballClub_Rest.DTO.SelectionModel)">
+            <summary>
+            Metoda koja sluzi za azuriranje selekcije u bazi
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.SelectionController.CreateSelection(BasketballClub_Rest.DTO.SelectionModel)">
+            <summary>
+            Metoda koja sluzi za kreiranje nove selekcije u bazi
+            </summary>
+            <param name="model">SelectionModel koji sadrzi neophodne podatke o selekciji</param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.SelectionController.DeleteSelection(System.Int32)">
+            <summary>
+            Metoda koja sluzi za brisanje selekcije iz baze
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Controllers.TrainingController">
+            <summary>
+            Kontroler za rad sa treninzima
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.TrainingController.GetAll">
+            <summary>
+            Metoda koja vraca sve postojece treninge iz baze
+            </summary>
+            <returns>IActionResult koji sadrzi listu treninga</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.TrainingController.GetByGym(System.Int32)">
+            <summary>
+            Metoda koja vraca treninge za odredjenu salu
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult koji sadrzi listu treninga</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.TrainingController.Create(BasketballClub_Rest.DTO.TrainingModel)">
+            <summary>
+            Metoda koja kreira novi trening
+            </summary>
+            <param name="model">TrainingModel koji sadrzi sve neophodne podatke za kreiranej treninga</param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Controllers.TrainingController.Delete(System.Int32)">
+            <summary>
+            Metoda koja brise trening iz baze
+            </summary>
+            <param name="id"></param>
+            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Administrator">
+            <summary>
+            Klasa koja se odnosi na administratore
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.BCContext">
+            <summary>
+            Klasa koja sluzi za pristup podacima u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Users">
+            <summary>
+            Users tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Gyms">
+            <summary>
+            Gyms tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Players">
+            <summary>
+            Players tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Selections">
+            <summary>
+            Selections tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Trainings">
+            <summary>
+            Trainings tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Coaches">
+            <summary>
+            Coaches tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.SelectionAges">
+            <summary>
+            SelectionAges tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Operators">
+            <summary>
+            Operators tabela u bazi
+            </summary>
+        </member>
+        <member name="P:BasketballClub_Rest.Domain.BCContext.Codes">
+            <summary>
+            Coes tabela u bazi
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Domain.BCContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            Metoda koja sluzi za konfigurisanje pristupa bazi
+            </summary>
+            <param name="optionsBuilder"></param>
+        </member>
+        <member name="M:BasketballClub_Rest.Domain.BCContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Metoda koja sluzi za konfigurisanje context klase
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Coach">
+            <summary>
+            Klasa koja se odnosi na trenere
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Code">
+            <summary>
+            Klasa koja se odnosi na registracione kodove
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Gym">
+            <summary>
+            Klasa koja se odnosi na sale za treninge
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Player">
+            <summary>
+            Klasa koja se odnosi na igrace
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Selection">
+            <summary>
+            Klasa koja se odnosi na selekcije
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.SelectionAge">
+            <summary>
+            Klasa koja se odnosi na uzrast
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.Training">
+            <summary>
+            Klasa koja se odnosi na treninge
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Domain.User">
+            <summary>
+            Klasa koja se odnosi na korisnike
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.AuthData">
+            <summary>
+            Klasa koja definise model odgovora prilikom registrovanja/prijavljivanja korisnika na sistem
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.CoachModel">
+            <summary>
+            Klasa koja definise model za kreiranje trenera
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.LoginModel">
+            <summary>
+            Klasa koja definise model za prijavljivanje korisnika na sistem
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.PlayerModel">
+            <summary>
+            Klasa koja definise model za kreiranje igraca
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.RegisterModel">
+            <summary>
+            Klasa koja definise model za registrovanje korisnika u sistem
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.SelectionModel">
+            <summary>
+            Klasa koja definise model za kreiranje i azuriranje selekcija
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.DTO.TrainingModel">
+            <summary>
+            Klasa koja definise model za kreiranje treninga
+            </summary>
+        </member>
+        <member name="T:BasketballClub_Rest.Repository.iRepository.IRepository`1">
+            <summary>
+            Genericki repozitorijum koji nasledjuju odredjeni repozitorijumi
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepository`1.GetAll">
+            <summary>
+            Metoda za vracanje svih objekata datog tipa iz baze
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepository`1.FindById(System.Int32)">
+            <summary>
+            Metoda za vracanje odredjenog objekta iz pomocu ID-a
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepository`1.Insert(`0)">
+            <summary>
+            Metoda za kreiranje novog objekta u bazi
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepository`1.Update(`0,System.Int32)">
+            <summary>
+            Metoda za azuriranje objekta
+            </summary>
+            <param name="item"></param>
+            <param name="id"></param>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepository`1.Delete(`0)">
+            <summary>
+            Metoda za brisanje trazenog objekta iz baze
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositoryCoach.GetWithoutSelection">
+            <summary>
+            Metoda za vracanje svih trenera iz baze koji ne treniraju nijednu selekciju
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositoryPlayer.FindByString(System.String)">
+            <summary>
+            Metoda za pretrazivanje igraca iz baze pomocu imena ili prezimena
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositoryPlayer.FindWithoutSelection">
+            <summary>
+            Metoda za vracanje iz baze svih igraca koji nemaju selekciju
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositorySelection.GetAllAges">
+            <summary>
+            Metoda za vracanje svih uzrasta iz baze
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositoryTraining.FindByGym(System.Int32)">
+            <summary>
+            Metoda za vracanje treninga po salama iz baze
+            </summary>
+            <param name="GymID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositoryUser.FindOne(System.Linq.Expressions.Expression{System.Func{BasketballClub_Rest.Domain.User,System.Boolean}})">
+            <summary>
+            Metoda za nalazenje odredjenog korisnika iz baze
+            </summary>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Repository.iRepository.IRepositoryUser.GetCodes">
+            <summary>
+            Metoda za vracanje registracionih kodova iz baze
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BasketballClub_Rest.Services.AuthService">
+            <summary>
+            Klasa koja implementira interfejs servisa za prijavljivanje, registrovanje i autorizaciju korisnika
+            </summary>
+        </member>
+        <member name="M:BasketballClub_Rest.Services.IAuthService.Register(BasketballClub_Rest.DTO.RegisterModel)">
+            <summary>
+            Metoda za registrovanje korisnika na sistem
+            </summary>
+            <param name="model"></param>
+            <returns>Korisnika ukoliko je uspesno registrovan, gresku ukoliko nije</returns>
+        </member>
+        <member name="M:BasketballClub_Rest.Services.IAuthService.Login(BasketballClub_Rest.DTO.LoginModel)">
+            <summary>
+            Metoda za prijavljivanje korisnika
+            </summary>
+            <param name="model"></param>
+            <returns>Toren i korisnika ukoliko je uspesno prijavljen, odgovarajucu gresku ukoliko nije</returns>
+        </member>
+    </members>
+</doc>
