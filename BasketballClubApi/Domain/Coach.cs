@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Domain
 {
+    /// <summary>
+    /// Klasa koja se odnosi na trenere
+    /// </summary>
     public class Coach: User
     {
      

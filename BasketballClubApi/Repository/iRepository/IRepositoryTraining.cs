@@ -8,6 +8,11 @@ namespace BasketballClub_Rest.Repository.iRepository
 {
     public interface IRepositoryTraining: IRepository<Training>
     {
+        /// <summary>
+        /// Metoda za vracanje treninga po salama iz baze
+        /// </summary>
+        /// <param name="GymID"></param>
+        /// <returns></returns>
         List<Training> FindByGym(int GymID);
 
     }
