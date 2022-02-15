@@ -34,6 +34,10 @@ namespace BasketballClubApi.Services
         public Player Update(Player item, int id)
         {
             Player player = uow.Players.FindById(id);
+            if(player == null)
+            {
+                throw new Exception("There is no player with given id");
+            }
             player.SelectionID = item.SelectionID;
             player.Height = item.Height;
             player.Weight = item.Weight;
@@ -65,6 +69,11 @@ namespace BasketballClubApi.Services
         public List<Player> FindWithoutSelection()
         {
             return uow.Players.FindWithoutSelection();
+        }
+
+        public Player FindByID(int id)
+        {
+            return uow.Players.FindById(id);
         }
 
         public void Delete(int id)

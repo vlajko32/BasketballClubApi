@@ -1,6 +1,7 @@
 ﻿using BasketballClub_Rest.Domain;
 using BasketballClub_Rest.DTO;
 using BasketballClub_Rest.Repository.UnitOfWork;
+using BasketballClubApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,11 @@ namespace BasketballClub_Rest.Controllers
     [ApiController]
     public class SelectionController : ControllerBase
     {
-        private IUnitOfWork uow;
+        private readonly SelectionService selectionService;
 
-        public SelectionController(IUnitOfWork uow)
+        public SelectionController(SelectionService selectionService)
         {
-            this.uow = uow;
+            this.selectionService = selectionService;
         }
         /// <summary>
         /// Metoda koja sluzi za vracanje svih selekcija iz baze
@@ -32,7 +33,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Selection> selections = uow.Selections.GetAll();
+            List<Selection> selections = selectionService.GetAll();
             return Ok(selections);
         }
 
@@ -43,7 +44,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet("ages")]
         public IActionResult GetAllAges()
         {
-            List<SelectionAge> selectionAges = uow.Selections.GetAllAges();
+            List<SelectionAge> selectionAges = selectionService.GetAllAges();
             return Ok(selectionAges);
         }
 
@@ -55,8 +56,15 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet("{id}")]
         public IActionResult GetByID([FromRoute] int id)
         {
-            Selection s = uow.Selections.FindById(id);
-            return Ok(s);
+            try
+            {
+                Selection s = selectionService.GetByID(id);
+                return Ok(s);
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
         }
 
         /// <summary>
@@ -72,55 +80,16 @@ namespace BasketballClub_Rest.Controllers
             {
                 return BadRequest(ModelState);
             }
-            Selection s = new Selection
+            try
             {
-                SelectionName = model.SelectionName,
+                Selection updated = selectionService.Update(model, id);
+                return Ok(updated);
 
-                SelectionAgeID = model.SelectionAgeID
-            };
-
-            if(model.AddedPlayers != null && model.AddedPlayers.Count > 0)
+            } catch(Exception e)
             {
-                foreach(Player p in model.AddedPlayers)
-                {
-                    Player player = uow.Players.FindById(p.PlayerID);
-                    player.SelectionID = id;
-                    uow.Players.Update(player, p.PlayerID);
-                }
-            }
-            if (model.RemovedPlayers != null && model.RemovedPlayers.Count > 0)
-            {
-                foreach (Player p in model.RemovedPlayers)
-                {
-                    Player player = uow.Players.FindById(p.PlayerID);
-                    player.SelectionID = null;
-                    uow.Players.Update(player, p.PlayerID);
-                }
-            }
-            if (model.AddedCoaches != null && model.AddedCoaches.Count> 0)
-            {
-                foreach (Coach c in model.AddedCoaches)
-                {
-                    Coach coach = uow.Coaches.FindById(c.UserID);
-                    coach.SelectionID = id;
-                    uow.Coaches.Update(coach, c.UserID);
-                }
+                return BadRequest(e.Message);
             }
 
-            if (model.RemovedCoaches != null && model.RemovedCoaches.Count > 0)
-            {
-                foreach (Coach c in model.RemovedCoaches)
-                {
-                    Coach coach = uow.Coaches.FindById(c.UserID);
-                    coach.SelectionID = null;
-                    uow.Coaches.Update(coach, c.UserID);
-                }
-            }
-
-            uow.Selections.Update(s, id);
-            uow.Commit();
-
-            return Ok();
 
         }
 
@@ -145,10 +114,17 @@ namespace BasketballClub_Rest.Controllers
               
             };
 
-            uow.Selections.Insert(selection);
-            uow.Commit();
+            try
+            {
+                Selection s = selectionService.Create(selection);
+                return Ok(s);
 
-            return Ok(selection);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                
+            }
         }
 
         /// <summary>
@@ -160,14 +136,16 @@ namespace BasketballClub_Rest.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteSelection(int id)
         {
-            Selection selection = uow.Selections.FindById(id);
-            if(selection == null)
+            try
             {
-                return BadRequest();
+                selectionService.Delete(id);
+                return Ok();
             }
-            uow.Selections.Delete(selection);
-            uow.Commit();
-            return Ok();
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
         }
     }
 }
