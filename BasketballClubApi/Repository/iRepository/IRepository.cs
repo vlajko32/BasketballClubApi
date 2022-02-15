@@ -26,13 +26,13 @@ namespace BasketballClub_Rest.Repository.iRepository
         /// Metoda za kreiranje novog objekta u bazi
         /// </summary>
         /// <param name="item"></param>
-        void Insert(T item);
+        T Insert(T item);
         /// <summary>
         /// Metoda za azuriranje objekta
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
-        void Update(T item, int id);
+        T Update(T item, int id);
         /// <summary>
         /// Metoda za brisanje trazenog objekta iz baze
         /// </summary>

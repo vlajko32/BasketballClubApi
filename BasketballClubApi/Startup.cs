@@ -1,6 +1,7 @@
 using BasketballClub_Rest.Domain;
 using BasketballClub_Rest.Repository.UnitOfWork;
 using BasketballClub_Rest.Services;
+using BasketballClubApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -69,6 +70,7 @@ namespace BasketballClubApi
               });
             services.AddDbContext<BCContext>();
             services.AddScoped<IUnitOfWork, BCUnitOfWork>();
+            services.AddScoped<PlayerService>();
 
             services.AddSingleton<IAuthService>(new AuthService(
                     new BCUnitOfWork(new BCContext()),

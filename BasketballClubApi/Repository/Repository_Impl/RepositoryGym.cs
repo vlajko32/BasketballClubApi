@@ -31,12 +31,12 @@ namespace BasketballClub_Rest.Repository.Repository_Impl
             return context.Gyms.ToList();
         }
 
-        public void Insert(Gym item)
+        public Gym Insert(Gym item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Gym item, int id)
+        public Gym Update(Gym item, int id)
         {
             throw new NotImplementedException();
         }

@@ -44,12 +44,16 @@ namespace BasketballClub_Rest.Repository.Repository_Impl
             return context.Players.Include(s => s.Selection).ThenInclude(sa => sa.SelectionAge).ToList();
         }
 
-        public void Insert(Player item)
+        public Player Insert(Player item)
         {
-            context.Players.Add(item);
+            if(context.Players.Add(item) == null)
+            {
+                return null;
+            }
+            return item;
         }
 
-        public void Update(Player item, int id)
+        public Player Update(Player item, int id)
         {
             Player updated = context.Players.Find(id);
             updated.SelectionID = item.SelectionID;
@@ -59,7 +63,11 @@ namespace BasketballClub_Rest.Repository.Repository_Impl
             {
                 updated.SelectionID = null;
             }
-            context.Players.Update(updated);
+            if(context.Players.Update(updated)==null)
+            {
+                return null;
+            }
+            return updated;
         }
 
         public List<Player> FindWithoutSelection()

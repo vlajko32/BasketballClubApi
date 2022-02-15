@@ -31,12 +31,16 @@ namespace BasketballClub_Rest.Repository.Repository_Impl
             throw new NotImplementedException();
         }
 
-        public void Insert(Administrator item)
+        public Administrator Insert(Administrator item)
         {
-            context.Operators.Add(item);
+            if(context.Operators.Add(item)==null)
+            {
+                return null;
+            }
+            return item;
         }
 
-        public void Update(Administrator item, int id)
+        public Administrator Update(Administrator item, int id)
         {
             throw new NotImplementedException();
         }

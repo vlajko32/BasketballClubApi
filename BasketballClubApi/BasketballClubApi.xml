@@ -106,7 +106,7 @@
             </summary>
             <returns>IActionResult koji sadrzi listu igraca</returns>
         </member>
-        <member name="M:BasketballClub_Rest.Controllers.PlayerController.GetAll(System.String)">
+        <member name="M:BasketballClub_Rest.Controllers.PlayerController.GetByCriteria(System.String)">
             <summary>
             Metoda koja sluzi za vracanje igraca sa odredjenim kriterijumom iz baze
             </summary>
@@ -440,6 +440,11 @@
             </summary>
             <param name="model"></param>
             <returns>Toren i korisnika ukoliko je uspesno prijavljen, odgovarajucu gresku ukoliko nije</returns>
+        </member>
+        <member name="T:BasketballClubApi.Services.PlayerService">
+            <summary>
+            Klasa koja sluzi kao servis za pozivanje operacija nad tabelom Players u bazi
+            </summary>
         </member>
     </members>
 </doc>

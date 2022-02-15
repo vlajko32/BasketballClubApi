@@ -1,6 +1,7 @@
 ﻿using BasketballClub_Rest.Domain;
 using BasketballClub_Rest.DTO;
 using BasketballClub_Rest.Repository.UnitOfWork;
+using BasketballClubApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,11 +21,11 @@ namespace BasketballClub_Rest.Controllers
     public class PlayerController : ControllerBase
     {
 
-        private IUnitOfWork uow;
+        private PlayerService playerService;
 
-        public PlayerController(IUnitOfWork uow)
+        public PlayerController(PlayerService playerService)
         {
-            this.uow = uow;
+            this.playerService = playerService;
         }
         /// <summary>
         /// Metoda koja sluzi za kreiranje novog igraca
@@ -53,10 +54,19 @@ namespace BasketballClub_Rest.Controllers
                 player.SelectionID = null;
             }
 
-            uow.Players.Insert(player);
-            uow.Commit();
+            try
+            {
+                Player p = playerService.Create(player);
+                return Ok(p);
 
-            return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
+
 
         }
 
@@ -73,14 +83,24 @@ namespace BasketballClub_Rest.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdatePlayer([FromRoute] int id, [FromBody] PlayerModel model)
         {
-            Player player = uow.Players.FindById(id);
-            player.SelectionID = model.SelectionID;
-            player.Height = model.Height;
-            player.Weight = model.Weight;
-            uow.Players.Update(player, id);
-            uow.Commit();
+            Player player = new Player
+            {
+                SelectionID = model.SelectionID,
+                Weight = model.Weight,
+                Height = model.Height
+            };
 
-            return Ok();
+            try
+            {
+                Player p = playerService.Update(player, id);
+                return Ok(p);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
 
         /// <summary>
@@ -93,14 +113,15 @@ namespace BasketballClub_Rest.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Player player = uow.Players.FindById(id);
-            if(player == null)
+            try
             {
-                return BadRequest();
+                playerService.Delete(id);
+                return Ok();
             }
-            uow.Players.Delete(player);
-            uow.Commit();
-            return Ok();
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         /// <summary>
@@ -111,7 +132,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet]
        public IActionResult GetAll()
         {
-            List<Player> players = uow.Players.GetAll();
+            List<Player> players = playerService.GetAll();
             return Ok(players);
         }
 
@@ -122,9 +143,9 @@ namespace BasketballClub_Rest.Controllers
         /// <param name="search"></param>
         /// <returns>IActionResult koji sadrzi listu igraca koji odgovaraju datom zahtevu</returns>
         [HttpGet("{search}")]
-        public IActionResult GetAll(string search)
+        public IActionResult GetByCriteria(string search)
         {
-            List<Player> players = uow.Players.FindByString(search);
+            List<Player> players = playerService.FindByString(search);
             return Ok(players);
         }
 
@@ -136,7 +157,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet("withoutSelection")]
         public IActionResult GetWithoutSelection()
         {
-            List<Player> players = uow.Players.FindWithoutSelection();
+            List<Player> players = playerService.FindWithoutSelection();
             return Ok(players);
         }
     }

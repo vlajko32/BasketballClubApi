@@ -36,17 +36,25 @@ namespace BasketballClub_Rest.Repository.Repository_Impl
             return context.SelectionAges.ToList();
         }
 
-        public void Insert(Selection item)
+        public Selection Insert(Selection item)
         {
-            context.Selections.Add(item);
+            if(context.Selections.Add(item)==null)
+            {
+                return null;
+            }
+            return item;
         }
 
-        public void Update(Selection item, int id)
+        public Selection Update(Selection item, int id)
         {
             Selection updated = context.Selections.Find(id);
             updated.SelectionName = item.SelectionName;
             updated.SelectionAgeID = item.SelectionAgeID;
-            context.Selections.Update(updated);
+            if(context.Selections.Update(updated)==null)
+            {
+                return null;
+            }
+            return updated;
         }
     }
 }

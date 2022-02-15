@@ -57,6 +57,17 @@ namespace BasketballClub_Rest.Domain
         /// </summary>
         public DbSet<Code> Codes { get; set; }
 
+
+        public BCContext()
+        {
+
+        }
+
+        public BCContext(DbContextOptions options): base(options)
+        {
+             
+        }
+
         /// <summary>
         /// Metoda koja sluzi za konfigurisanje pristupa bazi
         /// </summary>
@@ -64,7 +75,11 @@ namespace BasketballClub_Rest.Domain
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=basketball-club-api;");
+            if(!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=basketball-club-api;");
+
+            }
         }
 
         /// <summary>

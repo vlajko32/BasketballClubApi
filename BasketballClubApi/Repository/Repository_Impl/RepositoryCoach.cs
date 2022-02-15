@@ -40,17 +40,25 @@ namespace BasketballClub_Rest.Repository.Repository_Impl
             return context.Coaches.Where(c=> c.SelectionID==null).Include(s => s.Selection).ThenInclude(sa => sa.SelectionAge).ToList();
         }
 
-        public void Insert(Coach item)
+        public Coach Insert(Coach item)
         {
-            context.Coaches.Add(item);
+            if (context.Coaches.Add(item) == null)
+                return null;
+
+            return item;
         }
 
-        public void Update(Coach item, int id)
+        public Coach Update(Coach item, int id)
         {
             Coach updated = context.Coaches.Find(id);
             updated.SelectionID = item.SelectionID;
             updated.YearsOfExperience = item.YearsOfExperience;
-            context.Coaches.Update(updated);
+            if(context.Coaches.Update(updated)==null)
+            {
+                return null;
+            }
+            return updated;
+
         }
     }
 }
