@@ -102,6 +102,7 @@ namespace BasketballClubApi.Services
                 throw new NullReferenceException();
             }
             Selection s = uow.Selections.Insert(selection);
+
             uow.Commit();
             return s;
         }
@@ -115,7 +116,7 @@ namespace BasketballClubApi.Services
             Selection selection = uow.Selections.FindById(id);
             if (selection == null)
             {
-                throw new Exception("There is no selection with thad id");
+                throw new Exception("There is no selection with that id");
             }
             uow.Selections.Delete(selection);
             uow.Commit();

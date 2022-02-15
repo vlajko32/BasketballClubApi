@@ -73,6 +73,7 @@ namespace BCApiTest
         {
             var ex = Record.Exception(() => playerService.Delete(id));
             Assert.Equal("Invalid id!", ex.Message);
+            Dispose();
         }
 
         [Theory]
@@ -82,6 +83,7 @@ namespace BCApiTest
         {
             var ex = Record.Exception(() => playerService.Delete(id));
             Assert.Equal("Player with that id does not exist!", ex.Message);
+            Dispose();
         }
 
 
