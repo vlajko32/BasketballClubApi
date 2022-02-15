@@ -8,6 +8,10 @@ namespace BasketballClub_Rest.Repository.iRepository
 {
     public interface IRepositoryCoach : IRepository<Coach>
     {
+        /// <summary>
+        /// Metoda za vracanje svih trenera iz baze koji ne treniraju nijednu selekciju
+        /// </summary>
+        /// <returns></returns>
         List<Coach> GetWithoutSelection();
     }
 }

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Domain
 {
+    /// <summary>
+    /// Klasa koja se odnosi na igrace
+    /// </summary>
     public class Player
     {
         public int PlayerID { get; set; }

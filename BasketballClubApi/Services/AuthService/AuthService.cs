@@ -13,6 +13,9 @@ using System.Web.Helpers;
 
 namespace BasketballClub_Rest.Services
 {
+    /// <summary>
+    /// Klasa koja implementira interfejs servisa za prijavljivanje, registrovanje i autorizaciju korisnika
+    /// </summary>
     public class AuthService : IAuthService
     {
         private IUnitOfWork uow;
@@ -27,6 +30,7 @@ namespace BasketballClub_Rest.Services
             this.jwtLifespan = jwtLifespan;
         }
 
+      
         public AuthData Login(LoginModel model)
         {
             User user = uow.Users.FindOne(us => us.Username == model.Username);
@@ -65,6 +69,7 @@ namespace BasketballClub_Rest.Services
 
         }
 
+     
         public AuthData Register(RegisterModel model)
         {
             if (uow.Users.FindOne(us => us.Username == model.Username) != null)
@@ -72,6 +77,10 @@ namespace BasketballClub_Rest.Services
                 return new AuthData { Errors = new[] { "Username already taken!" } };
             }
             List<Code> codes = uow.Users.GetCodes();
+            if(!Int32.TryParse(model.Code, out int result))
+            {
+                return new AuthData { Errors = new[] { "Code must be a number!" } };
+            }
             if (!codes.Any(c => c.Value == Int32.Parse(model.Code)))
             {
                 return new AuthData { Errors = new[] { "Wrong registration code." } };

@@ -8,6 +8,10 @@ namespace BasketballClub_Rest.Repository.iRepository
 {
     public interface IRepositorySelection: IRepository<Selection>
     {
+        /// <summary>
+        /// Metoda za vracanje svih uzrasta iz baze
+        /// </summary>
+        /// <returns></returns>
         List<SelectionAge> GetAllAges();
 
     }

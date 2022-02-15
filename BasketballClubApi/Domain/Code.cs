@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.Domain
 {
+    /// <summary>
+    /// Klasa koja se odnosi na registracione kodove
+    /// </summary>
     public class Code
     {
         public int Id { get; set; }

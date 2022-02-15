@@ -43,6 +43,10 @@ namespace BasketballClubApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BasketballClubApi", Version = "v1" });
             });
+            services.AddControllers().AddNewtonsoftJson(
+                opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+           
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
@@ -72,6 +76,9 @@ namespace BasketballClubApi
                     Configuration.GetValue<int>("JWTLifespan")
 
                 ));
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +94,12 @@ namespace BasketballClubApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(builder => builder
+             .AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader()
+             );
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

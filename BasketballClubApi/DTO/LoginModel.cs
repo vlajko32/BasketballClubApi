@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.DTO
 {
+    /// <summary>
+    /// Klasa koja definise model za prijavljivanje korisnika na sistem
+    /// </summary>
     public class LoginModel
     {
         [Required]

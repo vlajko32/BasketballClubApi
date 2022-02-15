@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BasketballClub_Rest.DTO
 {
+    /// <summary>
+    /// Klasa koja definise model za kreiranje treninga
+    /// </summary>
     public class TrainingModel
     {
         public DateTime TrainingStart { get; set; }
