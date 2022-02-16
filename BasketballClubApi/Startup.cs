@@ -49,25 +49,25 @@ namespace BasketballClubApi
 
            
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
-              .AddJwtBearer(options =>
-              {
+            //  .AddJwtBearer(options =>
+            //  {
 
 
-                  options.TokenValidationParameters = new TokenValidationParameters
-                  {
-                      ValidateIssuer = false,
-                      ValidateAudience = false,
-                      ValidateLifetime = true,
-                      ValidateIssuerSigningKey = true,
+            //      options.TokenValidationParameters = new TokenValidationParameters
+            //      {
+            //          ValidateIssuer = false,
+            //          ValidateAudience = false,
+            //          ValidateLifetime = true,
+            //          ValidateIssuerSigningKey = true,
 
-                      IssuerSigningKey = new SymmetricSecurityKey(
-                          Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey"))
-                      )
-                  };
+            //          IssuerSigningKey = new SymmetricSecurityKey(
+            //              Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey"))
+            //          )
+            //      };
 
-              });
+            //  });
             services.AddDbContext<BCContext>();
             services.AddScoped<IUnitOfWork, BCUnitOfWork>();
             services.AddScoped<PlayerService>();

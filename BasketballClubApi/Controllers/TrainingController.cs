@@ -1,6 +1,7 @@
 ﻿using BasketballClub_Rest.Domain;
 using BasketballClub_Rest.DTO;
 using BasketballClub_Rest.Repository.UnitOfWork;
+using BasketballClubApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,12 +20,12 @@ namespace BasketballClub_Rest.Controllers
     [ApiController]
     public class TrainingController : ControllerBase
     {
-        private IUnitOfWork uow;
+        private TrainingService trainingService;
 
 
-        public TrainingController(IUnitOfWork uow)
+        public TrainingController(TrainingService trainingService)
         {
-            this.uow = uow;
+            this.trainingService = trainingService;
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Training> trainings = uow.Trainings.GetAll();
+            List<Training> trainings = trainingService.GetAll();
             return Ok(trainings);
         }
 
@@ -47,8 +48,15 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet("{id}")]
         public IActionResult GetByGym(int id)
         {
-            List<Training> trainings = uow.Trainings.FindByGym(id);
-            return Ok(trainings);
+            try
+            {
+                List<Training> trainings = trainingService.GetByGym(id);
+                return Ok(trainings);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         /// <summary>
@@ -75,32 +83,21 @@ namespace BasketballClub_Rest.Controllers
                 GymID = model.GymID
             };
 
-            uow.Trainings.Insert(training);
-            uow.Commit();
-
-            return Ok();
-        }
-
-        /// <summary>
-        /// Metoda koja brise trening iz baze
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
-        //[Authorize(Roles = "Operator, Coach")]
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            Training training = uow.Trainings.FindById(id);
-            if (training == null)
+            try
             {
-                return BadRequest();
-            }
-            uow.Trainings.Delete(training);
-            uow.Commit();
+                Training t = trainingService.Create(training);
+                
 
-            return Ok();
+                return Ok(t);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+           
         }
+
        
     }
 }

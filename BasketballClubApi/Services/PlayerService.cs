@@ -25,10 +25,17 @@ namespace BasketballClubApi.Services
             {
                 throw new NullReferenceException();
             }
-
-            Player pl = uow.Players.Insert(player);
-            uow.Commit();
-            return pl;
+            try
+            {
+                Player pl = uow.Players.Insert(player);
+                uow.Commit();
+                return pl;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Invalid selection ID!");
+            }
+           
         }
 
         public Player Update(Player item, int id)
@@ -50,6 +57,7 @@ namespace BasketballClubApi.Services
             {
                 throw new NullReferenceException();
             }
+
             Player p = uow.Players.Update(player, id);
             uow.Commit();
             return p;
@@ -73,6 +81,10 @@ namespace BasketballClubApi.Services
 
         public Player FindByID(int id)
         {
+            if(id<=0)
+            {
+                throw new Exception("Invalid id!");
+            }
             return uow.Players.FindById(id);
         }
 

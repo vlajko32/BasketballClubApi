@@ -118,6 +118,7 @@ namespace BasketballClubApi.Services
             {
                 throw new Exception("There is no selection with that id");
             }
+            
             uow.Selections.Delete(selection);
             uow.Commit();
             

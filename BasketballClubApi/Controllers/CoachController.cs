@@ -1,6 +1,7 @@
 ﻿using BasketballClub_Rest.Domain;
 using BasketballClub_Rest.DTO;
 using BasketballClub_Rest.Repository.UnitOfWork;
+using BasketballClubApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,34 +21,16 @@ namespace BasketballClub_Rest.Controllers
   //  [Authorize(Roles = "Operator, Coach")]
     public class CoachController : ControllerBase
     {
-        private IUnitOfWork uow;
+        private CoachService coachService;
 
-        public CoachController(IUnitOfWork uow)
+        public CoachController(CoachService coachService)
         {
-            this.uow = uow;
+            this.coachService = coachService;
         }
 
-        //[HttpPost("create")]
-        //public IActionResult CreatePlayer([FromBody] CoachModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    Coach player = new Coach
-        //    {
-        //        Name = model.Name,
-        //        Surname = model.Surname,
-        //        SelectionID = model.SelectionID,
-        //        BirthDate = model.BirthDate,
-        //    };
+       
 
-        //    uow.Players.Insert(player);
-        //    uow.Commit();
-
-        //    return Ok();
-
-        //}
+        
        // [Authorize(Roles = "Operator, Coach")]
        /// <summary>
        /// Metoda koja sluzi za vracanje svih objekata Coach iz baze
@@ -56,7 +39,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Coach> coaches = uow.Coaches.GetAll();
+            List<Coach> coaches = coachService.GetAll();
             return Ok(coaches);
         }
        // [Authorize(Roles = "Operator, Coach")]
@@ -68,8 +51,16 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-            Coach coach = uow.Coaches.FindById(id);
-            return Ok(coach);
+            try
+            {
+                Coach coach = coachService.GetByID(id);
+                return Ok(coach);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
         /// <summary>
@@ -80,7 +71,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet("withoutSelection")]
         public IActionResult GetWithoutSelection()
         {
-            List<Coach> coaches = uow.Coaches.GetWithoutSelection();
+            List<Coach> coaches = coachService.GetWithoutSelection();
             return Ok(coaches);
         }
         /// <summary>
@@ -92,14 +83,16 @@ namespace BasketballClub_Rest.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            User user = uow.Users.FindById(id);
-            if (user == null)
+            try
             {
-                return BadRequest();
+                coachService.Delete(id);
+                return Ok();
             }
-            uow.Users.Delete(user);
-            uow.Commit();
-            return Ok();
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
       //  [Authorize(Roles = "Operator")]
@@ -113,17 +106,16 @@ namespace BasketballClub_Rest.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateCoach([FromRoute] int id, [FromBody] CoachModel model)
         {
-            Coach coach = uow.Coaches.FindById(id);
-            coach.YearsOfExperience = model.YearsOfExperience;
-            coach.SelectionID = model.SelectionID;
-            if(coach.SelectionID==0)
+            try
             {
-                coach.SelectionID = null;
+                Coach c = coachService.Update(model, id);
+                return Ok(c);
             }
-            uow.Coaches.Update(coach, id);
-            uow.Commit();
+            catch (Exception ex)
+            {
 
-            return Ok();
+                return BadRequest(ex.Message);
+            }
         }
 
       

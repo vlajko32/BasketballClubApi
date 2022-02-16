@@ -190,13 +190,6 @@
             <param name="model">TrainingModel koji sadrzi sve neophodne podatke za kreiranej treninga</param>
             <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
         </member>
-        <member name="M:BasketballClub_Rest.Controllers.TrainingController.Delete(System.Int32)">
-            <summary>
-            Metoda koja brise trening iz baze
-            </summary>
-            <param name="id"></param>
-            <returns>IActionResult Ok ako je operacija uspesno obavljena, ili gresku ukoliko nije</returns>
-        </member>
         <member name="T:BasketballClub_Rest.Domain.Administrator">
             <summary>
             Klasa koja se odnosi na administratore

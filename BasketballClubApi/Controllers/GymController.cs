@@ -1,5 +1,6 @@
 ﻿using BasketballClub_Rest.Domain;
 using BasketballClub_Rest.Repository.UnitOfWork;
+using BasketballClubApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,11 @@ namespace BasketballClub_Rest.Controllers
     [ApiController]
     public class GymController : ControllerBase
     {
-        private IUnitOfWork uow;
+        private GymService gymService;
 
-        public GymController(IUnitOfWork uow)
+        public GymController(GymService gymService)
         {
-            this.uow = uow;
+            this.gymService = gymService;
         }
         /// <summary>
         /// Metoda koja vraca sve sale iz baze
@@ -31,7 +32,7 @@ namespace BasketballClub_Rest.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Gym> gyms = uow.Gyms.GetAll();
+            List<Gym> gyms = gymService.GetAll();
             return Ok(gyms);
         }
     }
