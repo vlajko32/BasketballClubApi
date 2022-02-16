@@ -33,6 +33,10 @@ namespace BasketballClubApi.Services
 
         public Training Create(Training training)
         {
+            if(training ==null)
+            {
+                throw new NullReferenceException();
+            }
             try
             {
                 Training t = uow.Trainings.Insert(training);

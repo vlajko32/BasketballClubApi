@@ -71,6 +71,12 @@ namespace BasketballClubApi
             services.AddDbContext<BCContext>();
             services.AddScoped<IUnitOfWork, BCUnitOfWork>();
             services.AddScoped<PlayerService>();
+            services.AddScoped<CoachService>();
+            services.AddScoped<GymService>();
+            services.AddScoped<TrainingService>();
+            services.AddScoped<SelectionService>();
+
+
 
             services.AddSingleton<IAuthService>(new AuthService(
                     new BCUnitOfWork(new BCContext()),
