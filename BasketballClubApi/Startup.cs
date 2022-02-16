@@ -22,15 +22,27 @@ using System.Threading.Tasks;
 
 namespace BasketballClubApi
 {
+    /// <summary>
+    /// Klasa za konfiguraciju aplikacije, odnosno dodavnje servisa i definisanje pipline-a
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Konstruktor za klasu Startup joja prima parametar configuartion
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
+        /// <summary>
+        /// Properti koji predstavlja konfiguraciju aplikacije
+        /// </summary>
         public IConfiguration Configuration { get; }
-
+        /// <summary>
+        /// Metoda koja nam sluzi za dodavanje servisa u kontejnjere
+        /// </summary>
+        /// <param name="services"></param>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -88,7 +100,11 @@ namespace BasketballClubApi
 
 
         }
-
+        /// <summary>
+        /// Metoda koja nam sluzi za definisanje pipeline-a
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

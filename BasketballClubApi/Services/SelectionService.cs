@@ -8,25 +8,41 @@ using System.Threading.Tasks;
 
 namespace BasketballClubApi.Services
 {
+    /// <summary>
+    /// Klasa koja sluzi kao servis za pozivanje operacija nad tabelom Selections u bazi
+    /// </summary>
     public class SelectionService
     {
         private readonly IUnitOfWork uow;
-
+        /// <summary>
+        /// Parametarski kontstruktor koji inicijalizuje UoW
+        /// </summary>
+        /// <param name="uow"></param>
         public SelectionService(IUnitOfWork uow)
         {
             this.uow = uow;
         }
-
+        /// <summary>
+        /// Metoda koja vraca sve selekcije iz baze
+        /// </summary>
+        /// <returns>Lista selekcija</returns>
         public List<Selection> GetAll()
         {
             return uow.Selections.GetAll();
         }
-
+        /// <summary>
+        /// Metoda koja vraca sve uzraste selekcija iz baze
+        /// </summary>
+        /// <returns>Lista uzrasta</returns>
         public List<SelectionAge> GetAllAges()
         {
             return uow.Selections.GetAllAges();
         }
-
+        /// <summary>
+        /// Metoda koja vraca selekciju sa trazenim id-jem iz baze
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Selekcija</returns>
         public Selection GetByID(int id)
         {
             if(id<=0)
@@ -37,7 +53,12 @@ namespace BasketballClubApi.Services
             Selection s = uow.Selections.FindById(id);
             return s;
         }
-
+        /// <summary>
+        /// Metoda koja azurira podatke o postojecoj selekciji u bazi
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="id"></param>
+        /// <returns>Selekciju ukoliko je operacija uspesno obavljena</returns>
         public Selection Update(SelectionModel model, int id)
         {
             if(id<=0)
@@ -94,7 +115,11 @@ namespace BasketballClubApi.Services
             return s;
 
         }
-
+        /// <summary>
+        /// Metoda koja kreira novu selekciju u bazi
+        /// </summary>
+        /// <param name="selection"></param>
+        /// <returns>Selekciju ukoliko je operacija uspesno obavljena</returns>
         public Selection Create(Selection selection)
         {
             if(selection == null)
@@ -106,7 +131,10 @@ namespace BasketballClubApi.Services
             uow.Commit();
             return s;
         }
-
+        /// <summary>
+        /// Metoda koja iz baze brise selekciju sa trazenim id-jem
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
             if(id<=0)

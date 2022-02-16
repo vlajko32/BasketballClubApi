@@ -434,10 +434,235 @@
             <param name="model"></param>
             <returns>Toren i korisnika ukoliko je uspesno prijavljen, odgovarajucu gresku ukoliko nije</returns>
         </member>
+        <member name="T:BasketballClubApi.Services.CoachService">
+            <summary>
+            Klasa koja predstavlja servis za pozivanje operacija nad tabelom Coaches u bazi
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Services.CoachService.#ctor(BasketballClub_Rest.Repository.UnitOfWork.IUnitOfWork)">
+            <summary>
+            Konstruktor sa parametrom koji inicijalizuje UoW
+            </summary>
+            <param name="uow"></param>
+        </member>
+        <member name="M:BasketballClubApi.Services.CoachService.GetAll">
+            <summary>
+            Metoda koja iz baze vraca sve trenere
+            </summary>
+            <returns>Lista trenera</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.CoachService.GetByID(System.Int32)">
+            <summary>
+            Metoda koja vraca trenera sa trazenim id-jem
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.CoachService.GetWithoutSelection">
+            <summary>
+            Metoda koja vraca iz baze sve trenere bez selekcije
+            </summary>
+            <returns>Lista trenera bez selekcije</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.CoachService.Delete(System.Int32)">
+            <summary>
+            Metoda koja brise trenera sa datim id-jem iz baze
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:BasketballClubApi.Services.CoachService.Update(BasketballClub_Rest.DTO.CoachModel,System.Int32)">
+            <summary>
+            Metoda koja sluzi za azuriranje podataka o postojecem treneru u bazi
+            </summary>
+            <param name="model"></param>
+            <param name="id"></param>
+            <returns>Azuriranog trenera ukoliko je operacija uspesno obavljena</returns>
+        </member>
+        <member name="T:BasketballClubApi.Services.GymService">
+            <summary>
+            Klasa koja predstavlja servis za rad sa pozivanje operacija nad tabelom Gyms u bazi
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Services.GymService.#ctor(BasketballClub_Rest.Repository.UnitOfWork.IUnitOfWork)">
+            <summary>
+            Parametarski kontstruktor koji inicijalizuje UoW
+            </summary>
+            <param name="uow"></param>
+        </member>
+        <member name="M:BasketballClubApi.Services.GymService.GetAll">
+            <summary>
+            Metoda koja iz baze vraca sve sale za treniranje
+            </summary>
+            <returns>Lista sala</returns>
+        </member>
         <member name="T:BasketballClubApi.Services.PlayerService">
             <summary>
             Klasa koja sluzi kao servis za pozivanje operacija nad tabelom Players u bazi
             </summary>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.#ctor(BasketballClub_Rest.Repository.UnitOfWork.IUnitOfWork)">
+            <summary>
+            Parametarski kontstruktor koji inicijalizuje UoW
+            </summary>
+            <param name="uow"></param>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.Create(BasketballClub_Rest.Domain.Player)">
+            <summary>
+            Metoda koja sluzi za kreiranje novog igraca u bazi
+            </summary>
+            <param name="player"></param>
+            <returns>Igraca ukoliko je operacija uspesno obavljena</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.Update(BasketballClub_Rest.Domain.Player,System.Int32)">
+            <summary>
+            Metoda koja sluzi za azuriranje podataka o postojecem igracu u bazi
+            </summary>
+            <param name="item"></param>
+            <param name="id"></param>
+            <returns>Igraca ukoliko je operacija uspesno obavljena</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.GetAll">
+            <summary>
+            Metoda koja vraca sve postojece igrace iz baze
+            </summary>
+            <returns>Lista igraca</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.FindByString(System.String)">
+            <summary>
+            Metoda koja pretrazuje i vraca iz baze igrace na osnovu datog parametra
+            </summary>
+            <param name="search"></param>
+            <returns>Lista igraca koji odgovaraju datom parametru</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.FindWithoutSelection">
+            <summary>
+            Metoda koja vraca igrace koji nemaju selekciju iz baze
+            </summary>
+            <returns>Lista igraca bez selekcije</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.FindByID(System.Int32)">
+            <summary>
+            Metoda koja pronalazi i vraca igraca iz baze na osnovu id-ja
+            </summary>
+            <param name="id"></param>
+            <returns>Igrac sa datim id-jem</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.PlayerService.Delete(System.Int32)">
+            <summary>
+            Metoda koja brise u bazi igraca sa datim id-jem
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:BasketballClubApi.Services.SelectionService">
+            <summary>
+            Klasa koja sluzi kao servis za pozivanje operacija nad tabelom Selections u bazi
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.#ctor(BasketballClub_Rest.Repository.UnitOfWork.IUnitOfWork)">
+            <summary>
+            Parametarski kontstruktor koji inicijalizuje UoW
+            </summary>
+            <param name="uow"></param>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.GetAll">
+            <summary>
+            Metoda koja vraca sve selekcije iz baze
+            </summary>
+            <returns>Lista selekcija</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.GetAllAges">
+            <summary>
+            Metoda koja vraca sve uzraste selekcija iz baze
+            </summary>
+            <returns>Lista uzrasta</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.GetByID(System.Int32)">
+            <summary>
+            Metoda koja vraca selekciju sa trazenim id-jem iz baze
+            </summary>
+            <param name="id"></param>
+            <returns>Selekcija</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.Update(BasketballClub_Rest.DTO.SelectionModel,System.Int32)">
+            <summary>
+            Metoda koja azurira podatke o postojecoj selekciji u bazi
+            </summary>
+            <param name="model"></param>
+            <param name="id"></param>
+            <returns>Selekciju ukoliko je operacija uspesno obavljena</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.Create(BasketballClub_Rest.Domain.Selection)">
+            <summary>
+            Metoda koja kreira novu selekciju u bazi
+            </summary>
+            <param name="selection"></param>
+            <returns>Selekciju ukoliko je operacija uspesno obavljena</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.SelectionService.Delete(System.Int32)">
+            <summary>
+            Metoda koja iz baze brise selekciju sa trazenim id-jem
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:BasketballClubApi.Services.TrainingService">
+            <summary>
+            Klasa koja predstavlja servis za pozivanje operacija nad tabelom Trainings u bazi
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Services.TrainingService.#ctor(BasketballClub_Rest.Repository.UnitOfWork.IUnitOfWork)">
+            <summary>
+            Parametarski kontstruktor koji inicijalizuje UoW
+            </summary>
+            <param name="uow"></param>
+        </member>
+        <member name="M:BasketballClubApi.Services.TrainingService.GetAll">
+            <summary>
+            Metoda koja vraca sve postojece treninge iz baze
+            </summary>
+            <returns>Lista treninga</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.TrainingService.GetByGym(System.Int32)">
+            <summary>
+            Metoda koja iz baze vraca treninge po odredjenim salama
+            </summary>
+            <param name="id"></param>
+            <returns>Lista treninga za trazenu salu</returns>
+        </member>
+        <member name="M:BasketballClubApi.Services.TrainingService.Create(BasketballClub_Rest.Domain.Training)">
+            <summary>
+            Metoda koja kreira novi trening u bazi
+            </summary>
+            <param name="training"></param>
+            <returns>Trening ukoliko je operacija uspesno obavljena</returns>
+        </member>
+        <member name="T:BasketballClubApi.Startup">
+            <summary>
+            Klasa za konfiguraciju aplikacije, odnosno dodavnje servisa i definisanje pipline-a
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Konstruktor za klasu Startup joja prima parametar configuartion
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:BasketballClubApi.Startup.Configuration">
+            <summary>
+            Properti koji predstavlja konfiguraciju aplikacije
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Metoda koja nam sluzi za dodavanje servisa u kontejnjere
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:BasketballClubApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Metoda koja nam sluzi za definisanje pipeline-a
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
         </member>
     </members>
 </doc>
