@@ -112,6 +112,12 @@ namespace BasketballClub_Rest.Domain
                 new Code { Id = 3, Value = 182429 },
                 new Code { Id = 4, Value = 292418 }
                 );
+
+            builder.Entity<Gym>().HasData(
+                new Gym { GymID = 1, Adress = "Prvomajska BB", GymName="Sportska Hala"},
+                 new Gym { GymID = 2, Adress = "Pere Radovanovica", GymName = "Gimnazija" },
+                  new Gym { GymID = 3, Adress = "Nikole Pasica", GymName = "Staklena dvorana" }
+                );
          
 
         }

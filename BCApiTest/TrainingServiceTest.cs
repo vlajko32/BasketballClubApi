@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace BCApiTest
 {
-    class TrainingServiceTest
+    public class TrainingServiceTest: IDisposable
     {
         private IUnitOfWork uow;
         private BCContext context;
@@ -26,14 +27,20 @@ namespace BCApiTest
             DbContextOptionsBuilder dbContextOption = new DbContextOptionsBuilder<BCContext>().UseInMemoryDatabase(new Guid().ToString());
             context = new BCContext(dbContextOption.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
             context.Database.EnsureCreated();
-            Seed();
             uow = new BCUnitOfWork(context);
             trainingService = new TrainingService(uow);
         }
 
-        private void Seed()
+      
+
+
+        [Fact]
+        public void AddingNullValueShouldThrowNullPointerException()
         {
 
+            Assert.Throws<NullReferenceException>(() => trainingService.Create(null));
+            Dispose();
         }
+
     }
 }
