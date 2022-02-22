@@ -664,5 +664,55 @@
             <param name="app"></param>
             <param name="env"></param>
         </member>
+        <member name="T:BasketballClubApi.Validation.BirthYearValidation">
+            <summary>
+            Klasa koja nam sluzi za validaciju godine rodjenja
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Validation.BirthYearValidation.IsValid(System.Object)">
+            <inheritdoc/>
+            <exception cref="T:System.NullReferenceException" />
+        </member>
+        <member name="T:BasketballClubApi.Validation.HeightValidation">
+            <summary>
+            Klasa koja nam sluzi za validaciju visine
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Validation.HeightValidation.IsValid(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:BasketballClubApi.Validation.IDValidation">
+            <summary>
+            Klasa koja sluzi za validaciju ID-jeva
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Validation.IDValidation.IsValid(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:BasketballClubApi.Validation.NameLengthValidation">
+            <summary>
+            Klasa koja nam sluzi za validaciju naziva
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Validation.NameLengthValidation.IsValid(System.Object)">
+            <inheritdoc/>
+            <exception cref="T:System.NullReferenceException" />
+        </member>
+        <member name="T:BasketballClubApi.Validation.WeightValidation">
+            <summary>
+            Klasa koja nam sluzi za validaciju tezine
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Validation.WeightValidation.IsValid(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:BasketballClubApi.Validation.YearsOfExperienceValidation">
+            <summary>
+            Klasa koja sluzi za validaciju godina iskustva trenera
+            </summary>
+        </member>
+        <member name="M:BasketballClubApi.Validation.YearsOfExperienceValidation.IsValid(System.Object)">
+            <inheritdoc/>
+        </member>
     </members>
 </doc>
