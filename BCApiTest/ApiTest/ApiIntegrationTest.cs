@@ -69,7 +69,7 @@ namespace BCApiTest
                 var response = client.GetAsync("/api/gym").Result;
 
                 response.EnsureSuccessStatusCode();
-                
+             
 
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }

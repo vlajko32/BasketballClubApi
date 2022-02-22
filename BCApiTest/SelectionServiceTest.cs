@@ -27,6 +27,7 @@ namespace BCApiTest
             DbContextOptionsBuilder dbContextOption = new DbContextOptionsBuilder<BCContext>().UseInMemoryDatabase(new Guid().ToString());
             context = new BCContext(dbContextOption.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
             context.Database.EnsureCreated();
+            Seed();
             uow = new BCUnitOfWork(context);
             selectionService = new SelectionService(uow);
         }
@@ -34,7 +35,7 @@ namespace BCApiTest
         [Fact]
         public void AddingNullValueShouldThrowNullPointerException()
         {
-            Seed();
+           
             Assert.Throws<NullReferenceException>(() => selectionService.Create(null));
             Dispose();
         }
@@ -44,7 +45,6 @@ namespace BCApiTest
         [InlineData(5, "C-team")]
         public void AddingSelectionShouldReturnSelection(int id, string name)
         {
-            Seed();
             Selection selection = new Selection{
                 SelectionName = name,
                 SelectionAgeID = id
@@ -59,7 +59,6 @@ namespace BCApiTest
         [InlineData(-10)]
         public void DeleteWithInvalidIDShouldReturnException(int id)
         {
-            Seed();
             var ex = Record.Exception(() => selectionService.Delete(id));
             Assert.Equal("Invalid id!", ex.Message);
             Dispose();
@@ -70,7 +69,6 @@ namespace BCApiTest
         [InlineData(10)]
         public void DeleteSelectionWhichDoesNotExistShouldReturnException(int id)
         {
-            Seed();
             var ex = Record.Exception(() => selectionService.Delete(id));
             Assert.Equal("There is no selection with that id", ex.Message);
             Dispose();
@@ -81,7 +79,6 @@ namespace BCApiTest
         [Fact]
         public void GetAllShouldReturnAll()
         {
-            Seed();
             List<Selection> selections = selectionService.GetAll();
             Assert.Equal(2, selections.Count);
             Dispose();
