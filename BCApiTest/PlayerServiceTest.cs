@@ -30,6 +30,7 @@ namespace BCApiTest
             DbContextOptionsBuilder dbContextOption = new DbContextOptionsBuilder<BCContext>().UseInMemoryDatabase(new Guid().ToString());
             context = new BCContext(dbContextOption.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
             context.Database.EnsureCreated();
+            Seed();
             uow = new BCUnitOfWork(context);
             playerService = new PlayerService(uow);
         }
@@ -37,7 +38,7 @@ namespace BCApiTest
         [Fact]
         public void AddingNullValueShouldThrowNullPointerException()
         {
-            Seed();
+            
 
             Assert.Throws<NullReferenceException>(() => playerService.Create(null));
             Dispose();
@@ -46,7 +47,7 @@ namespace BCApiTest
         [Fact]
         public void AddingPlayerShouldReturnPlayer()
         {
-            Seed();
+            
 
             Player player = new Player
             {
@@ -64,7 +65,7 @@ namespace BCApiTest
         [Fact]
         public void GetAllShouldReturnAllPlayers()
         {
-            Seed();
+            
 
             List<Player> players = playerService.GetAll();
    
@@ -77,7 +78,7 @@ namespace BCApiTest
         [InlineData(-10)]
         public void DeleteWithInvalidIDShouldReturnException(int id)
         {
-            Seed();
+            
 
             var ex = Record.Exception(() => playerService.Delete(id));
             Assert.Equal("Invalid id!", ex.Message);
@@ -89,7 +90,7 @@ namespace BCApiTest
         [InlineData(10)]
         public void DeletePlayerWhoDoesNotExistShouldReturnException(int id)
         {
-            Seed();
+          
 
             var ex = Record.Exception(() => playerService.Delete(id));
             Assert.Equal("Player with that id does not exist!", ex.Message);

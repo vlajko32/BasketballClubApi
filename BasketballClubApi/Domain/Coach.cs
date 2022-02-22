@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasketballClubApi.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace BasketballClub_Rest.Domain
     public class Coach: User
     {
      
-
+        [YearsOfExperienceValidation(ErrorMessage = ("Years of experience must be greater than 0 and cannot be greater than 50"))]
         public int YearsOfExperience { get; set; }
 
         public Selection Selection { get; set; }
-
+        [IDValidation(ErrorMessage =("ID must be greater than 0"))]
         public int? SelectionID { get; set; }
 
         public List<Training> Trainings { get; set; }
